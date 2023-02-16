@@ -1,7 +1,10 @@
+import React, {useState} from 'react';
 import ExpenseItem from "./Expenseitem";
 import './Expenses.css'
 import Card from "../UI/Card"
-function Expenses(props) {
+import ExpensesFilter from "./ExpensesFilter";
+const Expenses = (props) => {
+
     const expense = [
         {
             date: new Date(2023, 0, 10),
@@ -17,6 +20,7 @@ function Expenses(props) {
 
     return(
         <Card className="expenses">
+            <ExpensesFilter></ExpensesFilter>
             <ExpenseItem expenseData={expense[0]}></ExpenseItem>
             <ExpenseItem expenseData={expense[1]}></ExpenseItem>
         </Card>
