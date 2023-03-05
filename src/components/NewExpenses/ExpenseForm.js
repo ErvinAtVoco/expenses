@@ -33,6 +33,10 @@ const ExpenseForm = (props) => {
 
     }
 
+    const changeMenuState = (menuState) => {
+        props.changeMenuState(menuState)
+    }
+
     return(
         <form onSubmit={submitHandler}>
             <div className="new-expense__controls">
@@ -42,7 +46,7 @@ const ExpenseForm = (props) => {
                 </div>
                 <div className="new-expense__control">
                     <label>Amount</label>
-                    <input type="number" min="1" step="1" onChange={amountChangeHandler} value={enteredAmount}/>
+                    <input type="number" min="0.01" step="0.01" onChange={amountChangeHandler} value={enteredAmount}/>
                 </div>
                 <div className="new-expense__control">
                     <label>Date</label>
@@ -51,6 +55,7 @@ const ExpenseForm = (props) => {
             </div>
             <div className="new-expense__actions">
                 <button type="submit">Add Expense</button>
+                <button onClick={() => changeMenuState('Closed')}>Cancel</button>
             </div>
         </form>
     )

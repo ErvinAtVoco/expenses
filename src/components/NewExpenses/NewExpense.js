@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import './NewExpense.css'
 import ExpenseForm from "./ExpenseForm";
@@ -10,10 +10,18 @@ const NewExpense = (props) => {
        }
        props.onAddExpense(expenseData)
     }
+    const [state, setState] = useState('Closed')
+
+    const changeMenuState = (menuState) => {
+        setState(menuState)
+        return state
+    }
+
 
     return (
         <div className="new-expense">
-            <ExpenseForm onSaveExpenseData={saveExpenseDatahandler}></ExpenseForm>
+            {state === 'Closed' && <button onClick={() => changeMenuState('Open')}>Add new expense</button>}
+            {state === 'Open' && <ExpenseForm onSaveExpenseData={saveExpenseDatahandler} changeMenuState={changeMenuState}></ExpenseForm>}
         </div>
     )
 }

@@ -17,13 +17,19 @@ const Expenses = (props) => {
     console.log('expenses')
     console.log(props.expenses)
 
+    const filteredExpenses = props.expenses.filter((expenses) => {
+        return expenses.date.getFullYear() === parseInt(filteredYear)
+    })
 
     return (
         <Card className="expenses">
             <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler}></ExpensesFilter>
-            {props.expenses.filter(expenses => expenses.date.getFullYear() === parseInt(filteredYear)).map((expense) => {
+            {filteredExpenses.length === 0 && <p className='error-handler'>No expenses found.</p>}
+            {filteredExpenses.length > 0 &&
+                filteredExpenses.map((expense) => {
                     return <ExpenseItem key={expense.id} title={expense.title} date={expense.date} amount={expense.amount}></ExpenseItem>
-                })}
+                })
+            }
         </Card>
     );
 }
